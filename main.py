@@ -6,13 +6,6 @@ Created on Fri Oct 13 15:06:20 2023
 @author: edgibara
 """
 
-#%% Criar uma classe para controlde de usuario, tem
-# nome de usuario, regras para o nome, se n obedecer as regras o nome n existe, ex: ele n pode ter espaço virgula ou alguns outros caracteres
-# hash como password n vao guardar a password mas a hash dele
-# rule -> 3 niveis no minimo de usuario
-#metodos pra verificar senha:
-#metodo para verificar atribuiçoes
-#entrada nome de usuario/senha e retornar ok admin ok usuario normal ou nao ok nome n existe
 
 class Usuario:
     _forbidden:str =['ç',' ','.']
