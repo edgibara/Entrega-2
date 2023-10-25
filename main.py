@@ -7,16 +7,16 @@ Created on Fri Oct 13 15:06:20 2023
 """
 
 
-class Usuario:
+class Usuario: #Objetos inicializados dessa classe sao usarios logados, variaveis privadas e protegidas foram usadas.
     _forbidden:str =['ç',' ','.']
-    _users={'Eduardo': 6978309196542779321,
+    _users={'Eduardo': 6978309196542779321, #Dicionario com os nomes de usarios e hashs de suas senhas
              'Bob': 8541747932423710418,
              'root0':-2954852157039356282}
-    _levels={'Eduardo': 'Visitor',
+    _levels={'Eduardo': 'Visitor', #Dicionario com o nome de seus usuarios e seus niveis hierarquicos
               'Bob':'Admin',
               'root0':'su'}
-    def __init__(self,user: str,senha: str) -> None:
-        try:
+    def __init__(self,user: str,senha: str) -> None: #Metodo de inicializacao do objeto
+        try: #Codigo que tenta que inicializar um objeto e falha se tem algo de errado com o nome
             self.__name=user
             self.__pasw=hash(senha)
             for letter in user:
@@ -30,7 +30,7 @@ class Usuario:
             print("Nome nao eh string")
             del self.__name
             del self.__pasw
-        if self.__name in self._users.keys():
+        if self.__name in self._users.keys(): #Ifs que checam se o usario possui dados validos
             if self.__pasw == self._users[self.__name]:
                 try:
                     match self._levels[self.__name]:
@@ -50,12 +50,12 @@ class Usuario:
         else:
             print('Nome de usuario ou senha incorretos')
     @property
-    def get_name(self):
+    def get_name(self): #Funcao getter do proprio nome do user
         return self.__name
     @property
-    def get_level(self):
+    def get_level(self): #Funcao getter do nivel na hierarquia do usuario
         return self.__acess
-class Admin(Usuario):
+class Admin(Usuario): #Subclasse de usuario com alguns privilegios, consegue ver quandos usuarios estao registrados e criar novos
     _usrscounter=3
     def new_usr(self,nam: str,pasw:str,level:int) -> None:
         if self.get_level <=level:
@@ -65,7 +65,7 @@ class Admin(Usuario):
             self._users.update(new)
             print('Novo usuario adicionado')
             self._usrscounter+=1
-class root(Admin):
+class root(Admin): #Subclasse de Admin, possui todos os privilegios possiveis podendo criar novos caracteres proibidos
     def setforbidden(self,word:str)-> None:
         if len(word)==1:
             self._forbidden.append(word)
